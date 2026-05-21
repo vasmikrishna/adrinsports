@@ -1,0 +1,511 @@
+/* ═══════════════════════════════════════════════════════
+   Portfolio View — Public Athlete Profile Page
+   The MOST visually stunning page in the platform.
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Page Shell ────────────────────────────────────── */
+
+.page {
+  padding-top: 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  background: var(--bg-primary);
+}
+
+/* ── Background Blobs ──────────────────────────────── */
+
+.bgBlob1,
+.bgBlob2 {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+  opacity: 0.07;
+}
+
+.bgBlob1 {
+  width: 550px;
+  height: 550px;
+  top: -100px;
+  left: -160px;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  animation: floatBlob 18s ease-in-out infinite;
+}
+
+.bgBlob2 {
+  width: 480px;
+  height: 480px;
+  bottom: -100px;
+  right: -200px;
+  background: radial-gradient(circle, #a78bfa 0%, transparent 70%);
+  animation: floatBlob 24s ease-in-out infinite reverse;
+}
+
+@keyframes floatBlob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(30px, -40px) scale(1.08);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+  75% {
+    transform: translate(15px, 35px) scale(1.05);
+  }
+}
+
+@keyframes breathingGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(190, 242, 100, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(190, 242, 100, 0.3);
+  }
+}
+
+/* ── Container ─────────────────────────────────────── */
+
+.container {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 60px 24px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Back Button ───────────────────────────────────── */
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--font-headings);
+  text-decoration: none;
+  margin-bottom: 30px;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.backBtn:hover {
+  color: var(--primary);
+  transform: translateX(-4px);
+}
+
+/* ═════════════════════════════════════════════════════
+   Profile Hero — The Centerpiece
+   ═════════════════════════════════════════════════════ */
+
+.profileHero {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 60px;
+  padding: 48px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.heroGlow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  opacity: 0.08;
+  filter: blur(40px);
+  top: -100px;
+  right: -100px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Image Column ──────────────────────────────────── */
+
+.imageCol {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.glowCircle {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  opacity: 0.15;
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.profileImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 3px solid rgba(190, 242, 100, 0.4);
+  object-fit: cover;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5),
+              0 0 30px rgba(190, 242, 100, 0.08);
+  position: relative;
+  z-index: 2;
+  transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              border-color 0.3s ease;
+}
+
+.profileImage:hover {
+  transform: scale(1.05);
+  border-color: var(--primary);
+}
+
+/* ── Info Column ───────────────────────────────────── */
+
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1;
+}
+
+.sportBadge {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-glow);
+  border: 1px solid rgba(190, 242, 100, 0.3);
+  color: var(--primary);
+  font-family: var(--font-headings);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 5px 14px;
+  border-radius: 100px;
+  animation: breathingGlow 3s ease-in-out infinite;
+}
+
+.heroName {
+  font-family: var(--font-headings);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.heroRole {
+  font-size: 18px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.heroLocation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.heroAcademy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* ═════════════════════════════════════════════════════
+   Sections
+   ═════════════════════════════════════════════════════ */
+
+.section {
+  margin-bottom: 48px;
+}
+
+.sectionTitle {
+  font-family: var(--font-headings);
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  position: relative;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 48px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 100px;
+}
+
+/* ── Bio ───────────────────────────────────────────── */
+
+.bioText {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* ── Stats Grid ────────────────────────────────────── */
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.statCard {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(190, 242, 100, 0.3);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.4),
+              0 0 20px rgba(190, 242, 100, 0.08);
+}
+
+.statValue {
+  font-family: var(--font-headings);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+}
+
+/* ── Achievements ──────────────────────────────────── */
+
+.achievementsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.achievementItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--text-primary);
+  transition: var(--transition-smooth);
+}
+
+.achievementItem:hover {
+  border-color: rgba(190, 242, 100, 0.2);
+  background: var(--bg-tertiary);
+}
+
+.achievementIcon {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* ── Contact Grid ──────────────────────────────────── */
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.contactCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  border-radius: 12px;
+  transition: var(--transition-smooth);
+}
+
+.contactCard:hover {
+  border-color: rgba(190, 242, 100, 0.3);
+  transform: translateY(-2px);
+}
+
+.contactIcon {
+  font-size: 20px;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.contactLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.contactValue {
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ═════════════════════════════════════════════════════
+   Responsive
+   ═════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 16px 80px;
+  }
+
+  .profileHero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .imageCol {
+    justify-content: center;
+  }
+
+  .profileImage {
+    width: 160px;
+    height: 160px;
+  }
+
+  .glowCircle {
+    width: 160px;
+    height: 160px;
+  }
+
+  .infoCol {
+    align-items: center;
+    text-align: center;
+  }
+
+  .sportBadge {
+    align-self: center;
+  }
+
+  .heroLocation,
+  .heroAcademy {
+    justify-content: center;
+  }
+
+  .heroGlow {
+    width: 200px;
+    height: 200px;
+    top: -60px;
+    right: -60px;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contactGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+  }
+
+  .bgBlob1 {
+    width: 320px;
+    height: 320px;
+  }
+
+  .bgBlob2 {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileHero {
+    padding: 24px 16px;
+  }
+
+  .profileImage {
+    width: 130px;
+    height: 130px;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .statCard {
+    padding: 18px 12px;
+  }
+
+  .statValue {
+    font-size: 22px;
+  }
+
+  .heroName {
+    font-size: 26px;
+  }
+}

@@ -1,0 +1,390 @@
+.page {
+  padding-top: 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px 100px;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.badge {
+  align-self: center;
+}
+
+.title {
+  font-family: var(--font-headings);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Form & Calculator Layout Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.formCard {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.formTitle {
+  font-family: var(--font-headings);
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.formGroupDouble {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.input {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(190, 242, 100, 0.1);
+}
+
+.select {
+  cursor: pointer;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Glowing Neon Quantity Range Slider */
+.sliderWrapper {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sliderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sliderVal {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--primary);
+  font-family: var(--font-headings);
+  text-shadow: 0 0 10px rgba(190, 242, 100, 0.2);
+}
+
+.rangeInput {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border-color);
+  outline: none;
+}
+
+.rangeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--primary);
+  transition: var(--transition-smooth);
+}
+
+.rangeInput::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Checkbox button styling */
+.checkboxGroup {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 750;
+  margin-top: 10px;
+}
+
+/* Side Calculator Column styling */
+.calcCard {
+  background: rgba(27, 35, 54, 0.5);
+  border: 1px solid rgba(190, 242, 100, 0.15);
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  position: sticky;
+  top: 120px;
+}
+
+.calcTitle {
+  font-family: var(--font-headings);
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.calcIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--primary);
+}
+
+.calcRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.calcRow:last-child {
+  border-bottom: none;
+}
+
+.calcRowActive {
+  color: var(--text-primary);
+}
+
+.calcValHighlight {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.calcValDiscount {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 0 0;
+  margin-top: 8px;
+  border-top: 1px dashed var(--border-color);
+}
+
+.totalLabel {
+  font-family: var(--font-headings);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.totalVal {
+  font-family: var(--font-headings);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--primary);
+  text-shadow: 0 0 15px rgba(190, 242, 100, 0.3);
+}
+
+/* Tiering badges list */
+.tiersList {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tierBadge {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.tierBadgeActive {
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Submission Success modal overlay */
+.successOverlay {
+  text-align: center;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: scaleIn 0.4s ease;
+}
+
+.successIcon {
+  width: 72px;
+  height: 72px;
+  color: var(--primary);
+  filter: drop-shadow(0 0 15px rgba(190, 242, 100, 0.4));
+}
+
+.successTitle {
+  font-family: var(--font-headings);
+  font-size: 26px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.successDesc {
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.successBtn {
+  padding: 12px 30px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Responsive elements */
+@media (max-width: 968px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .calcCard {
+    position: static;
+  }
+  
+  .formGroupDouble {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+/* Glassmorphic Background Floating Blobs */
+.bgBlob1 {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(190, 242, 100, 0.05) 0%, transparent 70%);
+  top: 10%;
+  left: -200px;
+  filter: blur(80px);
+  z-index: 1;
+  pointer-events: none;
+  animation: floatBlob 18s infinite ease-in-out;
+}
+
+.bgBlob2 {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.04) 0%, transparent 70%);
+  bottom: 20%;
+  right: -200px;
+  filter: blur(100px);
+  z-index: 1;
+  pointer-events: none;
+  animation: floatBlob 24s infinite ease-in-out;
+}
+
+@keyframes floatBlob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(25px, -35px) scale(1.04);
+  }
+  66% {
+    transform: translate(-15px, 15px) scale(0.96);
+  }
+}

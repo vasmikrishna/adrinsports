@@ -1,0 +1,235 @@
+.page {
+  padding-top: 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px 100px;
+  width: 100%;
+}
+
+.header {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-family: var(--font-headings);
+  font-size: 38px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 16px;
+  max-width: 600px;
+}
+
+/* Search and Controls Row */
+.controlsRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+.searchWrapper {
+  position: relative;
+  flex: 1;
+  max-width: 480px;
+}
+
+.searchInput {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 14px 20px 14px 48px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.searchInput:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(190, 242, 100, 0.1);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+}
+
+.sortSelect {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 14px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  min-width: 200px;
+  transition: var(--transition-smooth);
+}
+
+.sortSelect:focus {
+  border-color: var(--primary);
+}
+
+/* Category Filters Toolbar */
+.filterBar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 40px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none; /* Hide scrollbars for layout elegance */
+}
+
+.filterBar::-webkit-scrollbar {
+  display: none;
+}
+
+.filterTab {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition-smooth);
+}
+
+.filterTab:hover {
+  border-color: var(--text-muted);
+  color: var(--text-primary);
+}
+
+.filterTabActive {
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 0 10px rgba(190, 242, 100, 0.1);
+}
+
+/* Catalog products grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.noResults {
+  text-align: center;
+  padding: 80px 24px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.noResultsIcon {
+  width: 48px;
+  height: 48px;
+  color: var(--text-muted);
+}
+
+.noResultsTitle {
+  font-family: var(--font-headings);
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.noResultsDesc {
+  color: var(--text-secondary);
+  font-size: 14px;
+  max-width: 380px;
+  line-height: 1.5;
+}
+
+.resetBtn {
+  padding: 10px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+
+/* Responsive elements */
+@media (max-width: 768px) {
+  .controlsRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .searchWrapper {
+    max-width: 100%;
+  }
+  
+  .sortSelect {
+    min-width: 100%;
+  }
+}
+
+/* Glassmorphic Background Floating Blobs */
+.bgBlob1 {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(190, 242, 100, 0.05) 0%, transparent 70%);
+  top: 10%;
+  left: -200px;
+  filter: blur(80px);
+  z-index: 1;
+  pointer-events: none;
+  animation: floatBlob 18s infinite ease-in-out;
+}
+
+.bgBlob2 {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.04) 0%, transparent 70%);
+  bottom: 20%;
+  right: -200px;
+  filter: blur(100px);
+  z-index: 1;
+  pointer-events: none;
+  animation: floatBlob 24s infinite ease-in-out;
+}
+
+@keyframes floatBlob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(25px, -35px) scale(1.04);
+  }
+  66% {
+    transform: translate(-15px, 15px) scale(0.96);
+  }
+}

@@ -1,0 +1,466 @@
+.page {
+  padding-top: 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px 100px;
+  width: 100%;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  transition: var(--transition-smooth);
+}
+
+.backBtn:hover {
+  color: var(--primary);
+  transform: translateX(-4px);
+}
+
+/* Detail Split Grid */
+.detailGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 60px;
+  margin-bottom: 80px;
+  align-items: start;
+}
+
+.mediaCol {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1.05;
+  position: relative;
+  box-shadow: var(--shadow-card);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detailsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.category {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.name {
+  font-family: var(--font-headings);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 16px;
+}
+
+.stars {
+  color: var(--primary);
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.ratingText {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.price {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.originalPrice {
+  font-size: 20px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.discount {
+  background: var(--accent);
+  color: white;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+}
+
+.description {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* Custom Product Spec Selectors */
+.selectorGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.selectorLabel {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.optionsGrid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.optionBadge {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.optionBadge:hover {
+  border-color: var(--text-muted);
+  color: var(--text-primary);
+}
+
+.optionBadgeActive {
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Purchase Section controls */
+.purchaseRow {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+.qtySelector {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.qtyBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: var(--transition-smooth);
+}
+
+.qtyBtn:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.qtyVal {
+  width: 44px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.addBtn {
+  flex: 1;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Features checklist */
+.featuresCard {
+  background: rgba(27, 35, 54, 0.4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.featuresTitle {
+  font-family: var(--font-headings);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.featuresList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.featureItem {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.featureCheck {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* Bottom Split: Specs sheet vs Reviews */
+.bottomTabs {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 60px;
+}
+
+.tabTitle {
+  font-family: var(--font-headings);
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+}
+
+.tabTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 32px;
+  height: 2px;
+  background: var(--primary);
+}
+
+.specsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.specRow {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.specRow:last-child {
+  border-bottom: none;
+}
+
+.specCellLabel {
+  padding: 16px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  width: 40%;
+}
+
+.specCellVal {
+  padding: 16px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Reviews listings & Submit form */
+.reviewCard {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.reviewerName {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.reviewDate {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.reviewComment {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.reviewForm {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(190, 242, 100, 0.2);
+  border-radius: var(--radius-md);
+  padding: 30px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 20px;
+}
+
+.inputField {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.inputField:focus {
+  border-color: var(--primary);
+}
+
+/* Star select handles */
+.ratingSelect {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ratingStar {
+  font-size: 24px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.ratingStarActive {
+  color: var(--primary);
+  text-shadow: 0 0 10px rgba(190, 242, 100, 0.3);
+}
+
+/* Responsive elements */
+@media (max-width: 968px) {
+  .detailGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .bottomTabs {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}
+
+/* Glassmorphic Background Floating Blobs */
+.bgBlob1 {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(190, 242, 100, 0.05) 0%, transparent 70%);
+  top: 15%;
+  left: -200px;
+  filter: blur(80px);
+  z-index: 1;
+  pointer-events: none;
+  animation: floatBlob 18s infinite ease-in-out;
+}
+
+.bgBlob2 {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.04) 0%, transparent 70%);
+  bottom: 25%;
+  right: -200px;
+  filter: blur(100px);
+  z-index: 1;
+  pointer-events: none;
+  animation: floatBlob 24s infinite ease-in-out;
+}
+
+@keyframes floatBlob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(25px, -35px) scale(1.04);
+  }
+  66% {
+    transform: translate(-15px, 15px) scale(0.96);
+  }
+}

@@ -1,0 +1,337 @@
+/* ═══════════════════════════════════════════════════════
+   Athletes Directory — Page Styles
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Page Shell ────────────────────────────────────── */
+
+.page {
+  padding-top: 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  background: var(--bg-primary);
+}
+
+/* ── Background Blobs ──────────────────────────────── */
+
+.bgBlob1,
+.bgBlob2 {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+  opacity: 0.07;
+}
+
+.bgBlob1 {
+  width: 500px;
+  height: 500px;
+  top: -120px;
+  right: -160px;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  animation: floatBlob 18s ease-in-out infinite;
+}
+
+.bgBlob2 {
+  width: 450px;
+  height: 450px;
+  bottom: -80px;
+  left: -180px;
+  background: radial-gradient(circle, #818cf8 0%, transparent 70%);
+  animation: floatBlob 24s ease-in-out infinite reverse;
+}
+
+@keyframes floatBlob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(30px, -40px) scale(1.08);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+  75% {
+    transform: translate(15px, 35px) scale(1.05);
+  }
+}
+
+/* ── Container ─────────────────────────────────────── */
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 60px 24px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ────────────────────────────────────────── */
+
+.header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 50px;
+}
+
+.badge {
+  display: inline-flex;
+  align-self: center;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-glow);
+  border: 1px solid rgba(190, 242, 100, 0.3);
+  color: var(--primary);
+  font-family: var(--font-headings);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 6px 16px;
+  border-radius: 100px;
+}
+
+.title {
+  font-family: var(--font-headings);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── Search Row ────────────────────────────────────── */
+
+.searchRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.searchWrapper {
+  position: relative;
+  flex: 1;
+  max-width: 480px;
+}
+
+.searchInput {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 14px 20px 14px 48px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: var(--font-body);
+  transition: var(--transition-smooth);
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+.searchInput:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(190, 242, 100, 0.1),
+              0 0 20px rgba(190, 242, 100, 0.06);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* ── Filter Bar ────────────────────────────────────── */
+
+.filterBar {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 40px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.filterBar::-webkit-scrollbar {
+  display: none;
+}
+
+.filterTab {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-family: var(--font-headings);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition-smooth);
+  flex-shrink: 0;
+}
+
+.filterTab:hover {
+  border-color: var(--text-muted);
+  color: var(--text-primary);
+}
+
+.filterTabActive {
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 0 16px rgba(190, 242, 100, 0.12);
+}
+
+/* ── Grid ──────────────────────────────────────────── */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* ── Empty State ───────────────────────────────────── */
+
+.emptyState {
+  text-align: center;
+  padding: 80px 40px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  grid-column: 1 / -1;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.emptyState p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  max-width: 360px;
+}
+
+/* ── CTA Section ───────────────────────────────────── */
+
+.createCta {
+  margin-top: 40px;
+  text-align: center;
+  padding: 60px 40px;
+  background: rgba(27, 35, 54, 0.4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.ctaTitle {
+  font-family: var(--font-headings);
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.ctaDesc {
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ── Responsive ────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 16px 80px;
+  }
+
+  .header {
+    margin-bottom: 36px;
+  }
+
+  .searchRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchWrapper {
+    max-width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .createCta {
+    padding: 40px 24px;
+  }
+
+  .ctaTitle {
+    font-size: 22px;
+  }
+
+  .bgBlob1 {
+    width: 300px;
+    height: 300px;
+  }
+
+  .bgBlob2 {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .emptyState {
+    padding: 50px 20px;
+  }
+
+  .filterBar {
+    gap: 8px;
+  }
+
+  .filterTab {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+}
