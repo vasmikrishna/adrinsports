@@ -1,4 +1,4 @@
-import { supabase } from './supabase';
+import { supabase, isSupabaseConfigured } from './supabase';
 
 export interface ProductVariant {
   color: string;
@@ -97,7 +97,7 @@ const productsCatalog: Product[] = [
       'Surface': 'Precision molded dimpled texture',
       'Standard': 'Match grade certified'
     },
-    image: '/images/hero_hockey.png', // Fallback to our high-quality asset
+    image: '/images/hero_hockey.jpg', // Fallback to our high-quality asset
     rating: 4.8,
     reviewsCount: 34,
     isBestSeller: true,
@@ -126,7 +126,7 @@ const productsCatalog: Product[] = [
       'Seam Type': 'Raised interlocking stitch seam',
       'Play Surface': 'Concrete, clay, turf, indoor'
     },
-    image: '/images/hero_cricket.png',
+    image: '/images/hero_cricket.jpg',
     rating: 4.9,
     reviewsCount: 88,
     isBestSeller: true,
@@ -155,7 +155,7 @@ const productsCatalog: Product[] = [
       'Size': '36.5 inch / 37.5 inch',
       'Weight': 'Lightweight (525g - 540g)'
     },
-    image: '/images/hero_hockey.png',
+    image: '/images/hero_hockey.jpg',
     rating: 4.7,
     reviewsCount: 19,
     isNewArrival: true
@@ -179,7 +179,7 @@ const productsCatalog: Product[] = [
       'Handle': 'Full rubber-wrapped round cane format',
       'Ball Type': 'Tennis ball and PVC wind balls only'
     },
-    image: '/images/hero_cricket.png',
+    image: '/images/hero_cricket.jpg',
     rating: 4.6,
     reviewsCount: 42,
     isNewArrival: true
@@ -203,7 +203,7 @@ const productsCatalog: Product[] = [
       'Diameter': 'Official 72mm',
       'Weight': '115 grams'
     },
-    image: '/images/hero_cricket.png',
+    image: '/images/hero_cricket.jpg',
     rating: 4.7,
     reviewsCount: 15
   },
@@ -226,7 +226,7 @@ const productsCatalog: Product[] = [
       'Length': '36.5 inch',
       'Flex Rating': 'Flexible (Forgiving impact response)'
     },
-    image: '/images/hero_hockey.png',
+    image: '/images/hero_hockey.jpg',
     rating: 4.5,
     reviewsCount: 22,
     isNewArrival: true
@@ -250,7 +250,7 @@ const productsCatalog: Product[] = [
       'Size Options': 'Size 3, Size 4, Size 5 available',
       'Body': 'Premium high-rigidity non-shatter PVC'
     },
-    image: '/images/hero_cricket.png',
+    image: '/images/hero_cricket.jpg',
     rating: 4.8,
     reviewsCount: 29
   },
@@ -273,7 +273,7 @@ const productsCatalog: Product[] = [
       'Structure': 'Hollow dense-wall core',
       'Certified': 'Yes - Academic Grade'
     },
-    image: '/images/hero_hockey.png',
+    image: '/images/hero_hockey.jpg',
     rating: 4.4,
     reviewsCount: 11
   },
@@ -296,7 +296,7 @@ const productsCatalog: Product[] = [
       'Body Composition': 'Structural impact-absorbing polycarbonate blend',
       'Edge Thickness': '38mm massive edge'
     },
-    image: '/images/hero_cricket.png',
+    image: '/images/hero_cricket.jpg',
     rating: 4.7,
     reviewsCount: 51,
     isNewArrival: true
@@ -319,7 +319,7 @@ const productsCatalog: Product[] = [
       'Size': 'Adult Standard / Youth Standard',
       'Material': 'Poly-urethane face, impact foam core'
     },
-    image: '/images/hero_cricket.png',
+    image: '/images/hero_cricket.jpg',
     rating: 4.8,
     reviewsCount: 18
   },
@@ -341,7 +341,7 @@ const productsCatalog: Product[] = [
       'Finger Inserts': 'High-density absorption foam overlay',
       'Size': 'Adult Right-Hand / Left-Hand configurations'
     },
-    image: '/images/hero_cricket.png',
+    image: '/images/hero_cricket.jpg',
     rating: 4.6,
     reviewsCount: 27
   },
@@ -363,7 +363,7 @@ const productsCatalog: Product[] = [
       'Lining': '12mm compressed EVA cushioning foam',
       'Fit': 'Double strap ergonomic calf wrapping'
     },
-    image: '/images/hero_hockey.png',
+    image: '/images/hero_hockey.jpg',
     rating: 4.7,
     reviewsCount: 16
   }
@@ -394,6 +394,9 @@ const mapDbProductToProduct = (dbProd: any): Product => {
 export const db = {
   // Get all products
   getProducts: async (): Promise<Product[]> => {
+    if (!isSupabaseConfigured) {
+      return productsCatalog;
+    }
     try {
       const { data, error } = await supabase
         .from('products')
@@ -407,13 +410,14 @@ export const db = {
     } catch (err) {
       console.warn('Supabase getProducts error, falling back to mock catalog:', err);
     }
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(productsCatalog), 150);
-    });
+    return productsCatalog;
   },
 
   // Get single product
   getProductById: async (id: string): Promise<Product | null> => {
+    if (!isSupabaseConfigured) {
+      return productsCatalog.find(p => p.id === id) || null;
+    }
     try {
       const { data, error } = await supabase
         .from('products')
@@ -428,10 +432,7 @@ export const db = {
     } catch (err) {
       console.warn(`Supabase getProductById(${id}) error, falling back to mock catalog:`, err);
     }
-    return new Promise((resolve) => {
-      const product = productsCatalog.find(p => p.id === id) || null;
-      setTimeout(() => resolve(product), 100);
-    });
+    return productsCatalog.find(p => p.id === id) || null;
   },
 
   // Search and filter products
@@ -442,6 +443,46 @@ export const db = {
     maxPrice?: number;
     sort?: string;
   }): Promise<Product[]> => {
+    const getLocalResult = () => {
+      let result = [...productsCatalog];
+
+      if (filters.category && filters.category !== 'all') {
+        result = result.filter(p => p.category === filters.category || p.category.split('-')[0] === filters.category);
+      }
+
+      if (filters.searchQuery) {
+        const queryStr = filters.searchQuery.toLowerCase();
+        result = result.filter(p => 
+          p.name.toLowerCase().includes(queryStr) || 
+          p.description.toLowerCase().includes(queryStr) ||
+          p.features.some(f => f.toLowerCase().includes(queryStr))
+        );
+      }
+
+      if (filters.minPrice !== undefined) {
+        result = result.filter(p => p.price >= filters.minPrice!);
+      }
+
+      if (filters.maxPrice !== undefined) {
+        result = result.filter(p => p.price <= filters.maxPrice!);
+      }
+
+      if (filters.sort) {
+        if (filters.sort === 'price-low') {
+          result.sort((a, b) => a.price - b.price);
+        } else if (filters.sort === 'price-high') {
+          result.sort((a, b) => b.price - a.price);
+        } else if (filters.sort === 'rating') {
+          result.sort((a, b) => b.rating - a.rating);
+        }
+      }
+      return result;
+    };
+
+    if (!isSupabaseConfigured) {
+      return getLocalResult();
+    }
+
     try {
       let query = supabase.from('products').select('*');
 
@@ -487,42 +528,7 @@ export const db = {
       console.warn('Supabase queryProducts error, falling back to mock query logic:', err);
     }
 
-    return new Promise((resolve) => {
-      let result = [...productsCatalog];
-
-      if (filters.category && filters.category !== 'all') {
-        result = result.filter(p => p.category === filters.category || p.category.split('-')[0] === filters.category);
-      }
-
-      if (filters.searchQuery) {
-        const queryStr = filters.searchQuery.toLowerCase();
-        result = result.filter(p => 
-          p.name.toLowerCase().includes(queryStr) || 
-          p.description.toLowerCase().includes(queryStr) ||
-          p.features.some(f => f.toLowerCase().includes(queryStr))
-        );
-      }
-
-      if (filters.minPrice !== undefined) {
-        result = result.filter(p => p.price >= filters.minPrice!);
-      }
-
-      if (filters.maxPrice !== undefined) {
-        result = result.filter(p => p.price <= filters.maxPrice!);
-      }
-
-      if (filters.sort) {
-        if (filters.sort === 'price-low') {
-          result.sort((a, b) => a.price - b.price);
-        } else if (filters.sort === 'price-high') {
-          result.sort((a, b) => b.price - a.price);
-        } else if (filters.sort === 'rating') {
-          result.sort((a, b) => b.rating - a.rating);
-        }
-      }
-
-      setTimeout(() => resolve(result), 200);
-    });
+    return getLocalResult();
   },
   // Submit Bulk Inquiry (Saves in Supabase and falls back to LocalStorage)
   submitInquiry: async (inquiryData: Omit<Inquiry, 'id' | 'createdAt'>): Promise<Inquiry> => {
@@ -541,6 +547,10 @@ export const db = {
       const list = existing ? JSON.parse(existing) : [];
       list.push(newInquiry);
       localStorage.setItem('adrin_inquiries', JSON.stringify(list));
+    }
+
+    if (!isSupabaseConfigured) {
+      return newInquiry;
     }
 
     try {
@@ -583,9 +593,7 @@ export const db = {
       console.warn('Supabase submitInquiry error, saved locally in localStorage:', err);
     }
 
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(newInquiry), 300);
-    });
+    return newInquiry;
   },
 
   // Get Submitted Inquiries
@@ -680,6 +688,10 @@ export const db = {
       localStorage.setItem(key, JSON.stringify(list));
     }
 
+    if (!isSupabaseConfigured) {
+      return newReview;
+    }
+
     try {
       const dbReview = {
         product_id: productId,
@@ -710,9 +722,7 @@ export const db = {
       console.warn('Supabase addReview error, saved locally in localStorage:', err);
     }
 
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(newReview), 200);
-    });
+    return newReview;
   },
 
   // Get Product Reviews

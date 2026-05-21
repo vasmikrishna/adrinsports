@@ -125,7 +125,7 @@ export default function Home() {
           <div className={styles.heroVisual}>
             <div className={styles.glowingCircle} />
             <Image
-              src="/images/hero_cricket.png"
+              src="/images/hero_cricket.jpg"
               alt="Premium Adrin Cricket Bat Showcase"
               width={460}
               height={460}
@@ -141,7 +141,7 @@ export default function Home() {
         <div className={styles.splitGrid}>
           {/* Cricket Banner */}
           <Link href="/shop?category=cricket" className={styles.splitCard}>
-            <div className={styles.splitCardBg} style={{ backgroundImage: 'url("/images/hero_cricket.png")' }} />
+            <div className={styles.splitCardBg} style={{ backgroundImage: 'url("/images/hero_cricket.jpg")' }} />
             <div className={styles.splitOverlay} />
             <div className={styles.splitContent}>
               <h2 className={styles.splitTitle}>Cricket Store</h2>
@@ -157,7 +157,7 @@ export default function Home() {
 
           {/* Hockey Banner */}
           <Link href="/shop?category=hockey" className={styles.splitCard}>
-            <div className={styles.splitCardBg} style={{ backgroundImage: 'url("/images/hero_hockey.png")' }} />
+            <div className={styles.splitCardBg} style={{ backgroundImage: 'url("/images/hero_hockey.jpg")' }} />
             <div className={styles.splitOverlay} />
             <div className={styles.splitContent}>
               <h2 className={styles.splitTitle}>Hockey Equipment</h2>

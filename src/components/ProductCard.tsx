@@ -9,9 +9,10 @@ import styles from './ProductCard.module.css';
 
 interface ProductCardProps {
   product: Product;
+  priority?: boolean;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = false }) => {
   const { addToCart } = useCart();
 
   const discountPercent = Math.round(
@@ -44,7 +45,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           width={300}
           height={300}
           className={styles.image}
-          priority
+          priority={priority}
         />
 
         {/* Quick Add Overlay */}

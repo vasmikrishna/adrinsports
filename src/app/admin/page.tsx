@@ -38,7 +38,7 @@ export default function AdminPortal() {
   const [prodCategory, setProdCategory] = useState<Product['category']>('cricket-bats');
   const [prodPrice, setProdPrice] = useState(0);
   const [prodOriginalPrice, setProdOriginalPrice] = useState(0);
-  const [prodImage, setProdImage] = useState('/images/hero_cricket.png');
+  const [prodImage, setProdImage] = useState('/images/hero_cricket.jpg');
   const [prodDescription, setProdDescription] = useState('');
   const [prodFeatures, setProdFeatures] = useState('');
   const [prodSpecs, setProdSpecs] = useState<Record<string, string>>({});
@@ -133,7 +133,7 @@ export default function AdminPortal() {
     setProdCategory('cricket-bats');
     setProdPrice(0);
     setProdOriginalPrice(0);
-    setProdImage('/images/hero_cricket.png');
+    setProdImage('/images/hero_cricket.jpg');
     setProdDescription('');
     setProdFeatures('');
     setProdSpecs({
@@ -723,7 +723,7 @@ export default function AdminPortal() {
                         className={styles.inputField}
                         value={prodImage}
                         onChange={e => setProdImage(e.target.value)}
-                        placeholder="/images/hero_cricket.png"
+                        placeholder="/images/hero_cricket.jpg"
                       />
                     </div>
                   </div>
